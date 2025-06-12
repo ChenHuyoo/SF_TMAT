@@ -1,0 +1,27 @@
+ninja_required_version = 1.3
+cxx = cl
+nvcc = C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.0\bin\nvcc
+
+cflags = /nologo /Ox /W3 /GL /DNDEBUG /MD /MD /wd4819 /wd4251 /wd4244 /wd4267 /wd4275 /wd4018 /wd4190 /EHsc -DWITH_CUDA -IE:\Haze\MRT-release-main\models\ops\src -IE:\anaconda\envs\tf\lib\site-packages\torch\include -IE:\anaconda\envs\tf\lib\site-packages\torch\include\torch\csrc\api\include -IE:\anaconda\envs\tf\lib\site-packages\torch\include\TH -IE:\anaconda\envs\tf\lib\site-packages\torch\include\THC "-IC:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.0\include" -IE:\anaconda\envs\tf\include -IE:\anaconda\envs\tf\include -ID:\Commit\VC\Tools\MSVC\14.33.31629\include -ID:\Commit\VC\Auxiliary\VS\include "-ID:\Windows Kits\10\include\10.0.22621.0\ucrt" "-ID:\Windows Kits\10\\include\10.0.22621.0\\um" "-ID:\Windows Kits\10\\include\10.0.22621.0\\shared" "-ID:\Windows Kits\10\\include\10.0.22621.0\\winrt" "-ID:\Windows Kits\10\\include\10.0.22621.0\\cppwinrt"
+post_cflags = -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=MultiScaleDeformableAttention -D_GLIBCXX_USE_CXX11_ABI=0 /std:c++14
+cuda_cflags = --use-local-env -Xcompiler /MD -Xcompiler /wd4819 -Xcompiler /wd4251 -Xcompiler /wd4244 -Xcompiler /wd4267 -Xcompiler /wd4275 -Xcompiler /wd4018 -Xcompiler /wd4190 -Xcompiler /EHsc -Xcudafe --diag_suppress=base_class_has_different_dll_interface -Xcudafe --diag_suppress=field_without_dll_interface -Xcudafe --diag_suppress=dll_interface_conflict_none_assumed -Xcudafe --diag_suppress=dll_interface_conflict_dllexport_assumed -DWITH_CUDA -IE:\Haze\MRT-release-main\models\ops\src -IE:\anaconda\envs\tf\lib\site-packages\torch\include -IE:\anaconda\envs\tf\lib\site-packages\torch\include\torch\csrc\api\include -IE:\anaconda\envs\tf\lib\site-packages\torch\include\TH -IE:\anaconda\envs\tf\lib\site-packages\torch\include\THC "-IC:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.0\include" -IE:\anaconda\envs\tf\include -IE:\anaconda\envs\tf\include -ID:\Commit\VC\Tools\MSVC\14.33.31629\include -ID:\Commit\VC\Auxiliary\VS\include "-ID:\Windows Kits\10\include\10.0.22621.0\ucrt" "-ID:\Windows Kits\10\\include\10.0.22621.0\\um" "-ID:\Windows Kits\10\\include\10.0.22621.0\\shared" "-ID:\Windows Kits\10\\include\10.0.22621.0\\winrt" "-ID:\Windows Kits\10\\include\10.0.22621.0\\cppwinrt"
+cuda_post_cflags = -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr -DCUDA_HAS_FP16=1 -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=MultiScaleDeformableAttention -D_GLIBCXX_USE_CXX11_ABI=0 -gencode=arch=compute_86,code=sm_86
+ldflags = 
+
+rule compile
+  command = cl /showIncludes $cflags -c $in /Fo$out $post_cflags
+  deps = msvc
+
+rule cuda_compile
+  command = $nvcc $cuda_cflags -c $in -o $out $cuda_post_cflags
+
+
+
+build E$:\Haze\MRT-release-main\models\ops\build\temp.win-amd64-3.8\Release\Haze\MRT-release-main\models\ops\src\vision.obj: compile E$:\Haze\MRT-release-main\models\ops\src\vision.cpp
+build E$:\Haze\MRT-release-main\models\ops\build\temp.win-amd64-3.8\Release\Haze\MRT-release-main\models\ops\src\cpu\ms_deform_attn_cpu.obj: compile E$:\Haze\MRT-release-main\models\ops\src\cpu\ms_deform_attn_cpu.cpp
+build E$:\Haze\MRT-release-main\models\ops\build\temp.win-amd64-3.8\Release\Haze\MRT-release-main\models\ops\src\cuda\ms_deform_attn_cuda.obj: cuda_compile E$:\Haze\MRT-release-main\models\ops\src\cuda\ms_deform_attn_cuda.cu
+
+
+
+
+
