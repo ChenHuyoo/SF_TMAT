@@ -26,7 +26,7 @@ python test.py
 You can download the data: [HazyDet](https://github.com/GrokCV/HazyDet), [DroneVehicle](https://github.com/VisDrone/DroneVehicle)
 
 ### 2.2 Training and evaluation
-As has been discussed in implementation details in the paper, to save computation cost, our method is designed as a three-stage paradigm. We first perform `source_only` training which is trained standardly by labeled source domain. Then, we perform `cross_domain_mae` to train the model with MAE branch. Finally, we perform `teaching` which utilize a teacher-student framework with MAE branch and selective retraining.
+ `source_only` → `cross_domain_mae`→ `teaching`
 ```bash
 sh configs/def-detr-base/haze/source_only.sh
 sh configs/def-detr-base/haze/cross_domain_mae.sh
