@@ -3,6 +3,8 @@ Official implementation for paper: **Teaching in adverse scenes: a statistically
 
 The paper has been accepted by **ISPRS Journal of Photogrammetry and Remote Sensing, 2025**
 
+![method](img/method.png)
+
 We use [Deformable DETR](https://github.com/fundamentalvision/Deformable-DETR) as the base detector. This code is built upon the original repository: https://github.com/fundamentalvision/Deformable-DETR, we thank for their excellent work.
 
 ## 1. Installation
