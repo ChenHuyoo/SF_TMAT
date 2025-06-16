@@ -48,5 +48,19 @@ sh configs/def-detr-base/haze/evaluation.sh
 ## Acknowledgement
 We sincerely appreciate the authors of the following codebases which made this project possible:
 - [MRT](https://github.com/JeremyZhao1998/MRT-release)  
-- [HazyDet](https://github.com/GrokCV/HazyDet) 
+- [HazyDet](https://github.com/GrokCV/HazyDet)
+
+## Citation
+
+```
+@misc{chen2025teachingadversescenesstatistically,
+      title={Teaching in adverse scenes: a statistically feedback-driven threshold and mask adjustment teacher-student framework for object detection in UAV images under adverse scenes}, 
+      author={Hongyu Chen and Jiping Liu and Yong Wang and Jun Zhu and Dejun Feng and Yakun Xie},
+      year={2025},
+      eprint={2506.11175},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2506.11175}, 
+}
+```
 
